@@ -1,5 +1,8 @@
 Revision history for Perl extension Lib::nids.
 
+0.03  Sat Feb 06 13:55:00 2010
+        - Small update to use Devel::CheckLib so that I can monitor cpan testers better (EDECA)
+
 0.02  Sat Feb 06 12:55:00 2010
         - Updated by David Cannings (EDECA) with fix for cpan bug #52879
 
