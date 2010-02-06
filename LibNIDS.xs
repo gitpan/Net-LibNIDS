@@ -252,7 +252,7 @@ SV*
 data(obj)
 	  SV* obj
 	CODE:
-	  RETVAL = newSVpv( obj2halfstream(obj)->data ,  obj2halfstream(obj)->count);
+	  RETVAL = newSVpv( obj2halfstream(obj)->data ,  obj2halfstream(obj)->count_new);
 	OUTPUT:
 	  RETVAL
 
