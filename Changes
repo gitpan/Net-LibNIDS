@@ -1,5 +1,8 @@
 Revision history for Perl extension Lib::nids.
 
+0.04  Sun Feb 07 14:55:00 2010
+	- Fix the broken attempt to use Devel::CheckLib (EDECA)
+
 0.03  Sat Feb 06 13:55:00 2010
         - Small update to use Devel::CheckLib so that I can monitor cpan testers better (EDECA)
 

@@ -1,4 +1,5 @@
 use 5.008;
+use lib 'inc';
 use ExtUtils::MakeMaker;
 use Devel::CheckLib;
 
