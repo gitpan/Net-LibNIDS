@@ -4,11 +4,23 @@ use ExtUtils::MakeMaker;
 use Devel::CheckLib;
 
 # Check for the dependencies we need to build
-check_lib_or_exit( lib => 'nids', header => 'nids.h' );
 check_lib_or_exit( lib => 'pcap', header => 'pcap.h' );
+check_lib_or_exit( lib => 'nids', header => 'nids.h' );
+
+# The Debian/Ubuntu/Red Hat packages link libnids to these, so
+# assume that we need to as well.  This is not the best way
+# to build the module, the ideal fix would be to inspect the 
+# linking of libnids.so (e.g. using ldd) and only link to the following
+# libs if libnids itself is.
+check_lib_or_exit( lib => 'gthread-2.0' );
+check_lib_or_exit( lib => 'net' );
 
 # See lib/ExtUtils/MakeMaker.pm for details of how to influence
 # the contents of the Makefile that is written.
+#
+# TODO: If libnids is linked against gthread-2.0, we need to link against
+#       it here.  If not, we shouldn't.  The next Devel::CheckLib will
+#       have check_lib to accomplish this
 WriteMakefile(
     'NAME'		=> 'Net::LibNIDS',
     'VERSION_FROM'	=> 'LibNIDS.pm', # finds $VERSION
@@ -16,7 +28,7 @@ WriteMakefile(
 #    ($] >= 5.005 ?    ## Add these new keywords supported since 5.005
 #      (ABSTRACT_FROM => 'LibNIDS.pm', # retrieve abstract from module
 #       AUTHOR     => 'Arthur Bergman <abergman@fotango.com>') : ()),
-    'LIBS'		=> ['-lnids -lpcap'], # e.g., '-lm'
+    'LIBS'		=> ['-lnids -lpcap -lgthread-2.0 -lnet'],
     'DEFINE'		=> '', # e.g., '-DHAVE_SOMETHING'
     'INC'		=> '-I.', # e.g., '-I. -I/usr/include/other'
 	# Un-comment this if you add C files to link with later:

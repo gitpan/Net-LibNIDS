@@ -1,6 +1,5 @@
-Lib/nids version 0.04
-=====================
-
+Net::LibNIDS version 0.1
+========================
 
 This module embeds the libnids C library written by Rafal Wojtczuk <nergal@avet.com.pl?.
 libnids is designed to do all lowlevel network code required by a network intrusion detection
@@ -21,7 +20,14 @@ DEPENDENCIES
 
 This module requires these other modules and libraries:
 
-  libnids
+  libnids, libpcap, libnet, libgthread-2.0
+
+On Debian/Ubuntu, the following packages satisfy library dependencies:
+
+  libnids-dev
+  libpcap-dev
+  libnet1-dev
+  libglib2.0-dev (for gthread-2.0)
 
 COPYRIGHT AND LICENCE
 
@@ -30,4 +36,3 @@ Updated 2010 David Cannings
 
 This library is free software; you can redistribute it and/or modify
 it under the same terms as Perl itself. 
-
