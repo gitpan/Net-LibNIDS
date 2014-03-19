@@ -185,6 +185,13 @@ server_port(obj)
 	OUTPUT: 
 	  RETVAL
 
+void
+discard(obj, numbytes);
+    SV* obj;
+    int numbytes;
+  CODE:
+    nids_discard(obj2tcpstream(obj), numbytes);
+
 
 
 MODULE = Net::LibNIDS		PACKAGE = Net::LibNIDS::tcp_stream::half
@@ -270,6 +277,7 @@ curr_ts(obj)
 	  RETVAL
 
 
+
 MODULE = Net::LibNIDS		PACKAGE = Net::LibNIDS		
 
 INCLUDE: const-xs.inc
@@ -292,6 +300,15 @@ tcp_callback(cb);
   CODE:
       our_tcp_callback = SvRV(cb);
       nids_register_tcp(tcp_callback_f);
+
+void
+checksum_off()
+	CODE:
+	  struct nids_chksum_ctl nochksumchk;
+	  nochksumchk.netaddr = 0;
+	  nochksumchk.mask = 0;
+	  nochksumchk.action = NIDS_DONT_CHKSUM;
+	  nids_register_chksum_ctl(&nochksumchk, 1);
 
 
 MODULE = Net::LibNIDS		PACKAGE = Net::LibNIDS::param

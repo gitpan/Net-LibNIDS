@@ -14,10 +14,8 @@ my $i = 0;
 Net::LibNIDS::tcp_callback(\&collector );
 Net::LibNIDS::run();
 
-
 sub collector {
     my $stream = shift;
-    
     if($stream->state == Net::LibNIDS::NIDS_JUST_EST()) {
 	$stream->server->collect_on;
 	$stream->client->collect_on;

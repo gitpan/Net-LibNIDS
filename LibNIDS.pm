@@ -7,7 +7,7 @@ use Carp;
 
 our @ISA = qw();
 
-our $VERSION = '0.1';
+our $VERSION = '0.12';
 
 sub AUTOLOAD {
     # This AUTOLOAD is used to 'autoload' constants from the constant()
@@ -62,7 +62,7 @@ Net::LibNIDS - Perl extension for reassembly of TCP/IP streams using the libnids
   Net::LibNIDS::run();                      # start the collection
   sub collector {
     my $connection = shift;
-    if($conncetion->state == Net::LibNIDS::NIDS_JUST_EST()) {
+    if($connection->state == Net::LibNIDS::NIDS_JUST_EST()) {
        $connection->server->collect_on;  #start tracing data from server     
        $connection->client->collect_on;  #start tracing data from server     
     }
@@ -89,7 +89,7 @@ The workflow of using libnids is to set all parameters, then call init, set up a
 
 =head1 Net::LibNIDS::init( )
 
-Must be called once before run() is called, will return 1 if successfull, will croak with a message if it fails.
+Must be called once before run() is called, will return 1 if successful, will croak with a message if it fails.
 
 =head1 Net::LibNIDS::tcp_callback( collector_callback )
 
@@ -98,6 +98,14 @@ This registers the tcp_callback function that will be invoked with each packet. 
 =head1 Net::LibNIDS::run( )
 
 This starts the NIDS collector, it will not finish until you call exit() or the packet file you are processing is finished
+
+=head1 Net::LibNIDS::checksum_off( )
+
+Disables libnids internal checksumming for all packets by setting NIDS_DONT_CHKSUM.
+
+=head1 Net::LibNIDS::nids_discard($tcp_stream, $num_bytes)
+
+Exports the nids_discard function, which may be called from within your TCP callback.  See the libnids documentation for further information on how to use this function.
 
 =head1 Net::LibNIDS::tcp_stream
 
@@ -141,7 +149,7 @@ Returns the state as a string instead of an integer, easier for debugging.
 
 =head2 $tcp_stream->server_ip  $tcp_stream->client_ip
 
-Returns the ip of the server and client. Client is the initiator of the connection. Returned as a string.
+Returns the IP address of the server and client. Client is the initiator of the connection. Returned as a string.
 
 =head2 $tcp_stream->server_port  $tcp_stream->client_port
 
@@ -219,7 +227,7 @@ Sets the filename to read packets from (tcpdump file), if this is set, then libn
 
 =head2 pcap_filter (Net::LibNIDS::param::set_pcap_filter(pcap_filter) Net::LibNIDS::param::get_pcap_filter)
 
-The pcap filter to apply on the packets. Note however that if you have fragmented packets you cannot use the pcap filter on for example ports, since fragmented ip packets might not contain enough tcp information to determine port.
+The pcap filter to apply on the packets. Note however that if you have fragmented packets you cannot use the pcap filter on for example ports, since fragmented IP packets might not contain enough tcp information to determine port.
 
 See the note in the libnids manpage for a workaround, or check the code in example.pl.
 
@@ -317,7 +325,7 @@ Previous versions of Net::LibNIDS included a patch against libnids in order to o
 
 libnids man page
 libpcap man page
-API.txt documentation from libnids distrobutions
+API.txt documentation from libnids distributions
 example.pl and performance.pl 
 
 =head1 AUTHOR
