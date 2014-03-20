@@ -1,12 +1,13 @@
 {
-   "abstract" : "unknown",
+   "abstract" : "Use the libnids library from Perl",
    "author" : [
-      "unknown"
+      "Arthur Bergman <abergman@fotango.com>",
+      "David Cannings <david@edeca.net>"
    ],
    "dynamic_config" : 1,
    "generated_by" : "ExtUtils::MakeMaker version 6.92, CPAN::Meta::Converter version 2.140640",
    "license" : [
-      "unknown"
+      "perl_5"
    ],
    "meta-spec" : {
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
@@ -31,9 +32,11 @@
          }
       },
       "runtime" : {
-         "requires" : {}
+         "requires" : {
+            "perl" : "5.008"
+         }
       }
    },
    "release_status" : "stable",
-   "version" : "0.12"
+   "version" : "0.13"
 }
